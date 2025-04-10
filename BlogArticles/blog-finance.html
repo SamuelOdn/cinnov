@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+        <script id="allow-copy_script" src="chrome-extension://aefehdhdciieocakfobpaaolhipkcpgc/content_scripts/copy.js"></script>
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Gestion Financière Simplifiée pour les Entrepreneurs - CMAG Innovations
+        </title>
+        <meta name="description" content="CMAG Innovations accompagne les jeunes entrepreneurs en Afrique à travers la formation, la consultance, le coaching et l'accompagnement pour innover, réussir et impacter.">
+        <meta name="keywords" content="entrepreneuriat, jeunes, afrique, innovation, formation, coaching, consultance, startup, CMAG Innovations">
+
+        <!-- Preline CSS (Keep if other components use it) -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.css">
+        <!-- Tailwind CSS via CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Preline JS (Keep if other components use it) -->
+        <script src="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.js"></script>
+        <!-- Favicon  -->
+        <link rel="icon" href="../Pic/CMAG1.jpg" type="image/x-icon">
+        <!-- Tailwind Config (Duplicate removed below) -->
+        <!-- AlpineJS via CDN -->
+        <script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <!-- Configuration personnalisée de Tailwind -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            "cmag-blue": "#1E3A8A", // Bleu foncé pour le sérieux et la confiance
+                            "cmag-teal": "#14B8A6", // Teal/Vert pour l'innovation et la croissance
+                            "cmag-gray": "#4B5563", // Gris pour le texte
+                        },
+                        fontFamily: {
+                            sans: ["Poppins", "sans-serif"], // Police moderne et lisible
+                        },
+                    },
+                },
+                // Add plugins if needed, e.g., forms, typography
+                // Note: require() won't work directly in browser script tag like this.
+                // These would typically be part of a build process (e.g., using Node.js with Tailwind CLI or PostCSS)
+                // plugins: [
+                //     require('@tailwindcss/forms'),
+                //     require('@tailwindcss/typography'),
+                //     require('@tailwindcss/aspect-ratio'),
+                // ],
+                // For CDN usage, you might rely on built-in classes or find CDN-compatible plugin versions if available.
+                 plugins: [
+                    // Add CDN compatible plugins here if needed, or rely on core Tailwind.
+                 ],
+            };
+        </script>
+        <!-- Importation de la police Poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+        <style>
+            /* Style pour le scroll fluide */
+            html {
+                scroll-behavior: smooth;
+            }
+            /* Animation subtile pour l'apparition  */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .fade-in {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+
+            /* Additional styles for Alpine transition if needed */
+            [x-cloak] { display: none !important; }
+
+            /* Ensure line-clamp works (might need a plugin or manual setup depending on Tailwind version/config) */
+             .line-clamp-3 {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+            }
+        </style>
+
+    <!-- Inline Tailwind styles (Consider moving to a separate CSS file or using @apply in <style>) -->
+    <style>
+    /* Minimal necessary Tailwind base/component styles for brevity - full styles assumed from CDN */
+    *, ::before, ::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:Poppins, sans-serif}body{margin:0;line-height:inherit}img, video{max-width:100%;height:auto}button{cursor:pointer} [x-cloak] { display: none !important; }
+    /* Include other essential base styles if not relying solely on CDN */
+    </style></head>
+    <body class="bg-gray-50 font-sans text-cmag-gray">
+        <!-- Entete & Navigation -->
+        <header class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="#" class="flex items-center space-x-2">
+                             <img src="../Pic/CMAG1R.png" alt="Logo CMAG Innovations" class="h-16 md:h-20 w-auto text-cmag-blue"> <!-- Adjusted height slightly -->
+                            <!-- <span class="font-bold text-xl text-cmag-blue">CMAG Innovations</span> -->
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation Links -->
+                    <div class="hidden md:flex space-x-6">
+                        <a href="../index.html#about" class="text-gray-600 hover:text-cmag-blue transition duration-150 ease-in-out">À Propos</a>
+                        <a href="../index.html#services" class="text-gray-600 hover:text-cmag-blue transition duration-150 ease-in-out">Nos Services</a>
+                        <a href="../index.html#ateliers" class="text-gray-600 hover:text-cmag-blue transition duration-150 ease-in-out">Ateliers</a> <!-- Added link -->
+                        <a href="../index.html#blog" class="text-gray-600 hover:text-cmag-blue transition duration-150 ease-in-out">Blog</a>
+                        <a href="../index.html#contact" class="text-gray-600 hover:text-cmag-blue transition duration-150 ease-in-out">Contact</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cmag-blue" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Ouvrir le menu principal</span>
+                            <!-- Icone "menu" (hamburger) -->
+                            <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                            <!-- Icone "fermer" (X) -->
+                            <svg x-show="mobileMenuOpen" x-cloak class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Mobile Menu, show/hide based on menu state. -->
+            <div class="md:hidden" id="mobile-menu" x-show="mobileMenuOpen" x-cloak
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 @click.away="mobileMenuOpen = false">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="../index.html#about" @click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-50 hover:text-cmag-blue block px-3 py-2 rounded-md text-base font-medium">À Propos</a>
+                    <a href="../index.html#services" @click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-50 hover:text-cmag-blue block px-3 py-2 rounded-md text-base font-medium">Nos Services</a>
+                    <a href="../index.html#ateliers" @click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-50 hover:text-cmag-blue block px-3 py-2 rounded-md text-base font-medium">Ateliers</a> <!-- Added link -->
+                    <a href="../index.html#blog" @click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-50 hover:text-cmag-blue block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                    <a href="../index.html#contact" @click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-50 hover:text-cmag-blue block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="py-16 md:py-24">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <img src="../Pic/1.jpg" alt="Contenu de l'atelier sur la gestion financière" class="w-full rounded-lg shadow-md mb-8">
+                <h1 class="text-3xl font-bold text-cmag-blue mb-6">Gestion Financière Simplifiée pour les Entrepreneurs</h1>
+                <p class="text-lg leading-relaxed mb-4">
+                    Une bonne gestion financière est le pilier de toute entreprise prospère, en particulier pour les jeunes entrepreneurs qui démarrent. Comprendre les flux de trésorerie, établir un budget et planifier l'avenir financier sont des compétences essentielles.
+                </p>
+                <h2 class="text-2xl font-semibold text-cmag-teal mb-4">Les Fondamentaux de la Gestion Financière</h2>
+                <ul class="list-disc list-inside mb-4">
+                    <li><strong>Établir un budget:</strong> Suivez vos revenus et vos dépenses pour identifier les opportunités d'optimisation.</li>
+                    <li><strong>Gérer les flux de trésorerie:</strong> Assurez-vous d'avoir suffisamment de liquidités pour couvrir vos obligations à court terme.</li>
+                    <li><strong>Comprendre les états financiers:</strong> Apprenez à lire et à interpréter votre bilan, votre compte de résultat et votre tableau des flux de trésorerie.</li>
+                    <li><strong>Financement d'entreprise:</strong> Explorez les différentes options de financement disponibles pour votre startup (prêts, investisseurs, etc.).</li>
+                    <li><strong>Planification fiscale:</strong> Optimisez votre situation fiscale en comprenant les obligations et les incitations fiscales pour les entreprises.</li>
+                    <li><strong>Investissement:</strong> Apprenez les bases de l'investissement pour faire croître votre patrimoine à long terme.</li>
+                </ul>
+                <p class="text-lg leading-relaxed mb-8">
+                    Notre atelier "Gestion Financière Simplifiée" est conçu pour démystifier la finance d'entreprise et fournir aux entrepreneurs les outils et les connaissances nécessaires pour prendre des décisions financières éclairées.
+                </p>
+                <h2 class="text-2xl font-semibold text-cmag-teal mb-4">Pourquoi Participer à Cet Atelier?</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                    Participer à cet atelier vous permettra de:
+                </p>
+                <ul class="list-disc list-inside mb-4">
+                    <li>Acquérir des compétences pratiques en gestion financière.</li>
+                    <li>Échanger avec d'autres entrepreneurs et experts du secteur.</li>
+                    <li>Recevoir des conseils personnalisés pour votre entreprise.</li>
+                    <li>Développer un plan financier solide pour l'avenir de votre entreprise.</li>
+                </ul>  
+                
+                <div class="flex justify-between mt-12">
+                    <a href="blog-marketing.html" class="text-cmag-teal hover:text-cmag-blue font-semibold transition duration-150 ease-in-out">← Article Précédent</a>
+                    <a href="../index.html" class="text-cmag-teal hover:text-cmag-blue font-semibold transition duration-150 ease-in-out">Retour à l'accueil</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Pied de Page -->
+        <footer class="bg-cmag-blue text-gray-300 py-8"> <!-- Increased padding -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+                 <div class="mb-4"> <!-- Logo in footer -->
+                    <a href="#" class="inline-block">
+                         <!--img src="Pic/CMAG1R_white.png" alt="Logo CMAG Innovations Blanc" class="h-16 w-auto mx-auto"> Assumes white logo variant exists -->
+                    </a>
+                 </div>
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-left md:text-center"> <!-- Footer links -->
+                     <div>
+                        <h5 class="font-semibold text-white mb-2">Navigation</h5>
+                        <ul>
+                            <li><a href="/#about" class="hover:text-white">À Propos</a></li>
+                            <li><a href="#services" class="hover:text-white">Services</a></li>
+                            <li><a href="#ateliers" class="hover:text-white">Ateliers</a></li>
+                            <li><a href="#blog" class="hover:text-white">Blog</a></li>
+                            <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h5 class="font-semibold text-white mb-2">Légal</h5>
+                         <ul>
+                            <li><a href="#" class="hover:text-white">Mentions Légales</a></li>
+                            <li><a href="#" class="hover:text-white">Politique de Confidentialité</a></li>
+                        </ul>
+                     </div>
+                      <div class="col-span-2 md:col-span-1">
+                        <h5 class="font-semibold text-white mb-2">Contact</h5>
+                         <ul class="space-y-1">
+                            <li><a href="mailto:ckounde@cmag-innovations.com" class="hover:text-white flex items-center space-x-2 md:justify-center"><svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg><span>Email</span></a></li>
+                            <li><a href="tel:+221776517779" class="hover:text-white flex items-center space-x-2 md:justify-center"><svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg><span>Téléphone</span></a></li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h5 class="font-semibold text-white mb-2">Suivez-nous</h5>
+                           <!-- Liens vers réseaux sociaux -->
+                        <div class="flex justify-start md:justify-center space-x-4">
+                            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook" class="p-2 rounded-full flex items-center justify-center transition-colors duration-300 bg-white/10 hover:bg-white/20">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"></path></svg>
+                            </a>
+
+                            <a href="https://wa.me/+221776517779/" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="p-2 rounded-full flex items-center justify-center transition-colors duration-300 bg-white/10 hover:bg-white/20">
+                                <span class="sr-only">WhatsApp</span>
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.273-.099-.471-.148-.67.15-.197.297-.768.967-.941 1.164-.173.197-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.67-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+                            </a>
+
+                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" title="Twitter" class="p-2 rounded-full flex items-center justify-center transition-colors duration-300 bg-white/10 hover:bg-white/20">
+                                <span class="sr-only">Twitter</span>
+                                 <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.616 1.924 2.388 3.316 4.481 3.355-1.754 1.376-3.971 2.196-6.328 2.196-.421 0-.837-.025-1.246-.074 2.265 1.451 4.963 2.295 7.865 2.295 9.427 0 14.65-7.818 14.65-14.65l-.001-.667c1.001-.717 1.868-1.617 2.558-2.653z"></path></svg>
+                            </a>
+
+                            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="p-2 rounded-full flex items-center justify-center transition-colors duration-300 bg-white/10 hover:bg-white/20">
+                                <span class="sr-only">LinkedIn</span>
+                               <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.59-11.018-3.714v-2.155z"></path></svg>
+                            </a>
+                        </div>
+                     </div>
+                 </div>
+
+                <p class="mt-8 border-t border-gray-700 pt-6">&copy; <span x-text="new Date().getFullYear()"></span> CMAG Innovations. Tous droits réservés.</p>
+
+            </div>
+        </footer>
+    <language-learning-content-box data-wxt-shadow-root=""></language-learning-content-box>
+    </body>
+</html>
